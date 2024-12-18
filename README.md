@@ -28,7 +28,7 @@ To run the simulations, you need:
 
 H-Infinity Controller:
 - HInfinity.m: Implements the H-Infinity control design for the quarter-car model using MATLAB’s hinfsyn function.
-- Researchers can modify the weighting functions Ws_d,Wa_b,W_road,W_act in the HInfinity.m script to prioritize robustness or control effort based on their requirements. These functions determine the trade-off between disturbance rejection, control effort, and system output performance.
+- Researchers can modify the weighting functions Wsd, Wab, Wroad, Wact in the HInfinity.m script to prioritize robustness or control effort based on their requirements. These functions determine the trade-off between disturbance rejection, control effort, and system output performance.
 Key Features:
 - Minimizes the worst-case disturbance amplification.
 - Simulates body travel, suspension deflection, and control force.
