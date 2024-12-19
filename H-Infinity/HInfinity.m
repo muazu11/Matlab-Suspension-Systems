@@ -71,7 +71,7 @@ bodemag(qcar(:,'r'),'b', CL(:,:,1),'r-.', ...
 legend('Open-loop','Comfort','Balanced','Handling','location','SouthEast')
 title('Body travel, suspension deflection, and body acceleration due to road')
 % Road disturbance
-t = 0:0.0025:1;
+t = 0:0.0025:4;
 roaddist = zeros(size(t));
 roaddist(1:101) = 0.025*(1-cos(8*pi*t(1:101)));
 
