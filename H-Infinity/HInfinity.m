@@ -122,41 +122,10 @@ subplot(224)
 plot(t,zeros(size(t)),'b',t,y1(:,4),'r')
 title('Control force'), xlabel('Time (s)'), ylabel('f_s (kN)')
 legend('Open-loop','Robust design','location','SouthEast')
-rng('default'), nsamp = 100;  clf
-
-% Uncertain closed-loop model with balanced H-infinity controller
-CLU = connect(qcar,Act,K(:,:,2),'r',{'xb','sd','ab'});
-lsim(usample(CLU,nsamp),'b',CLU.Nominal,'r',roaddist,t)
-title('Nominal "balanced" design')
-legend('Perturbed','Nominal','location','SouthEast')
-% Uncertain closed-loop model with balanced robust controller
-CLU = connect(qcar,Act,Krob,'r',{'xb','sd','ab'});
-lsim(usample(CLU,nsamp),'b',CLU.Nominal,'r',roaddist,t)
-title('Robust "balanced" design')
-legend('Perturbed','Nominal','location','SouthEast')
-% Create array of reduced-order controllers
-NS = order(Krob);
-StateOrders = 1:NS;
-Kred = reduce(Krob,StateOrders);
-% Compute robust performance margin for each reduced controller
-gamma = 1;
-CLP = lft(qcaric(:,:,2),Kred);
-for k=1:NS
-   PM(k) = robgain(CLP(:,:,k),gamma);
-end
-
-% Compare robust performance of reduced- and full-order controllers
-PMfull = PM(end).LowerBound;
-plot(StateOrders,[PM.LowerBound],'b-o',...
-   StateOrders,repmat(PMfull,[1 NS]),'r');
-grid
-title('Robust performance margin as a function of controller order')
-legend('Reduced order','Full order','location','SouthEast')
 % Create tunable 3rd-order controller 
 K = tunableSS('K',3,ncont,nmeas);
+
 
 % Tune robust performance of closed-loop system CL
 CL0 = lft(qcaric(:,:,2),K);
 [CL,RP] = musyn(CL0);
-K3 = getBlockValue(CL,'K');
-bode(K3)

@@ -58,9 +58,9 @@ kz(tt>=0.5 & tt<=1.0) = 1;
 Zr = [tt(:),kz(:)];
 
 K = zeros(size(K_LQR));
-open_loop = sim('QuarterCart_LQR_Control.slx',tsim);
+open_loop = sim('QuarterCar_LQR_Control.slx',tsim);
 K = K_LQR;
-closed_loop = sim('QuarterCart_LQR_Control.slx',tsim);
+closed_loop = sim('QuarterCar_LQR_Control.slx',tsim);
 
 figure(1);
 set(gcf,'WindowState','Maximized');
